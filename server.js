@@ -7,22 +7,22 @@ const app = express();
 app.use(cors());
 app.use(json());
 
-app.get("/", (req, res) => {
-  axios
-    .get("http://192.168.1.33/get", {
-      params: {
-        message: "text",
-      },
-    })
-    .then(function (response) {
-      console.log("GET Response:", response.data);
-      res.send(response.data);
-    })
-    .catch(function (error) {
-      console.error("GET Error:", error);
-    });
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   axios
+//     .get("http://192.168.1.33/get", {
+//       params: {
+//         message: "text",
+//       },
+//     })
+//     .then(function (response) {
+//       console.log("GET Response:", response.data);
+//       res.send(response.data);
+//     })
+//     .catch(function (error) {
+//       console.error("GET Error:", error);
+//     });
+//   res.send("Hello World!");
+// });
 
 // Get a reference to the Firestore
 const usersCollection = db.collection("users");
@@ -73,7 +73,7 @@ app.get("/realtime-updates", (req, res) => {
     }
   );
 });
-const usersRef = rtdb.ref("users");
+// const usersRef = rtdb.ref("users");
 
 // // Attach a value event listener to "users" path
 // usersRef.on("value", (snapshot) => {
@@ -82,34 +82,34 @@ const usersRef = rtdb.ref("users");
 //   console.log("Real-time data:", usersData);
 // });
 
-const sendGetRequest = (text) => {
-  console.log(text, "safsadf");
-  axios
-    .get("http://192.168.1.33/get", {
-      params: {
-        message: text,
-      },
-    })
-    .then(function (response) {
-      console.log("GET Response:", response.data);
-    })
-    .catch(function (error) {
-      console.error("GET Error:", error);
-    });
-};
+// const sendGetRequest = (text) => {
+//   console.log(text, "safsadf");
+//   axios
+//     .get("http://192.168.1.33/get", {
+//       params: {
+//         message: text,
+//       },
+//     })
+//     .then(function (response) {
+//       console.log("GET Response:", response.data);
+//     })
+//     .catch(function (error) {
+//       console.error("GET Error:", error);
+//     });
+// };
 
-app.post("/create", async (req, res) => {
-  try {
-    // const data = req.body;
-    // await User.add(data);
-    const text = "Hello ESP32! GET request received!";
-    // Trigger the GET request after the "/create" route is called
-    sendGetRequest(text);
-    res.status(200).send("User created successfully");
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
+// app.post("/create", async (req, res) => {
+//   try {
+//     // const data = req.body;
+//     // await User.add(data);
+//     const text = "Hello ESP32! GET request received!";
+//     // Trigger the GET request after the "/create" route is called
+//     sendGetRequest(text);
+//     res.status(200).send("User created successfully");
+//   } catch (error) {
+//     res.status(400).send(error.message);
+//   }
+// });
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
