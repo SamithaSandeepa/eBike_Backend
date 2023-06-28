@@ -8,6 +8,19 @@ app.use(cors());
 app.use(json());
 
 app.get("/", (req, res) => {
+  axios
+    .get("http://192.168.1.33/get", {
+      params: {
+        message: "text",
+      },
+    })
+    .then(function (response) {
+      console.log("GET Response:", response.data);
+      res.send(response.data);
+    })
+    .catch(function (error) {
+      console.error("GET Error:", error);
+    });
   res.send("Hello World!");
 });
 
@@ -68,19 +81,6 @@ const usersRef = rtdb.ref("users");
 //   const usersData = snapshot.val();
 //   console.log("Real-time data:", usersData);
 // });
-
-axios
-  .get("http://192.168.1.33/get", {
-    params: {
-      message: "text",
-    },
-  })
-  .then(function (response) {
-    console.log("GET Response:", response.data);
-  })
-  .catch(function (error) {
-    console.error("GET Error:", error);
-  });
 
 const sendGetRequest = (text) => {
   console.log(text, "safsadf");
